@@ -5,6 +5,18 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
+
+//Middlewares
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+//Routes
+app.get("/",(req,res)=>{
+    res.send("Homw Page")
+})
+
+
 const PORT = process.env.PORT || 5000;
 
 //connect to mongodb server

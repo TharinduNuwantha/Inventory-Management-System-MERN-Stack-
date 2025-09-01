@@ -5,6 +5,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
+
+//Routes
+app.get("/",(req,res)=>{
+    res.send("Homw Page")
+})
+
+
 const PORT = process.env.PORT || 5000;
 
 //connect to mongodb server

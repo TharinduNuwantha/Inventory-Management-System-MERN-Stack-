@@ -18,6 +18,22 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Email has already been registered :(" });
   }
 
+  //Create new user
+  const user = await User.create({
+    name,
+    email,
+    password
+  });
+
+  if(user){
+    const {_id,name,email,photo,phone,bio} = user;
+    res.status(201).json({
+        _id,name,email,photo,phone,bio
+    })
+  }else{
+      return res.status(400).json({ message: "Invalid User data :(" });
+  }
+
   res.json({ message: "Register User", data: { name, email } });
 });
 

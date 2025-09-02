@@ -12,7 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-
+//Routes Middlewares
+app.use("/api/users",userRoute) 
 
 //Routes
 app.get("/",(req,res)=>{

@@ -1,6 +1,13 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs")
+const jwt  = require('jsonwebtoken');
+
+
+const generateToken = (id) =>{
+    return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:"1d"})
+}
+
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body || {};
@@ -19,6 +26,7 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Email has already been registered :(" });
   }
 
+
  //Encrypt passwoard
  const salt = await bcrypt.genSalt(10)
  const hashedPasswoard = await bcrypt.hash(password,salt);
@@ -30,10 +38,14 @@ const registerUser = asyncHandler(async (req, res) => {
     password:hashedPasswoard
   });
 
+    //Generate Token
+  const token = generateToken(user._id);
+
+
   if(user){
     const {_id,name,email,photo,phone,bio} = user;
     res.status(201).json({
-        _id,name,email,photo,phone,bio
+        _id,name,email,photo,phone,bio,token
     })
   }else{
       return res.status(400).json({ message: "Invalid User data :(" });

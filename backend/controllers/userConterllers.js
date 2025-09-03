@@ -5,6 +5,7 @@ const jwt  = require('jsonwebtoken');
 const { now } = require("mongoose");
 
 
+
 const generateToken = (id) =>{
     return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:"1d"})
 }
@@ -67,7 +68,43 @@ const registerUser = asyncHandler(async (req, res) => {
 //Login User
 
 const loginUser = asyncHandler(async (req,res)=>{
-    res.send("login router");
+    const {email,password} = req.body;
+
+    //validate Request
+    if(!email || !password){
+         return res.status(400).json({ message: "Please Add email and passwoard :(" });
+    }
+    //cheack if user exists
+    const user = await User.findOne({email});
+    
+    if(!user){
+         return res.status(400).json({ message: "User not found :( ,please signup :)" });
+    }
+
+    //cheack if passwoard correct
+    const  passwoardIsCorrect = await bcrypt.compare(password,user.password);
+
+        //Generate Token
+        const token = generateToken(user._id);
+
+        //Send HTPP-only cookie
+        res.cookie("token",token,{
+            path:"/",
+            httpOnly:true,
+            expires:new Date(Date.now()+ 1000*86400), //1 day
+            sameSite:"none",
+            secure:true
+        })
+
+
+    if(email && passwoardIsCorrect){
+        const {_id,name,email,photo,phone,bio} = user;
+            res.status(200).json({
+            _id,name,email,photo,phone,bio,token
+        })
+    }else{
+        return res.status(400).json({ message: "Invalid email or passwoard :(" });
+    }
 });
 
 

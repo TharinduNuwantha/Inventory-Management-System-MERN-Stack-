@@ -119,9 +119,16 @@ const logout = asyncHandler(async (req,res)=>{
         return res.status(200).json({message:"Successfully Deleted :{"});
 });
 
+// get User
+
+const getUser = asyncHandler(async (req,res)=>{
+    res.send("Get User");
+});
+
 
 module.exports = {
     registerUser,
     loginUser,
-    logout
+    logout,
+    getUser
 };

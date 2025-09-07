@@ -174,11 +174,19 @@ const updateUser = asyncHandler(async (req,res)=> {
     }
 });
 
+
+// change passwoard
+
+const changePasswoard = asyncHandler(async (req,res)=>{
+    res.send("change passwoard");
+})
+
 module.exports = {
     registerUser,
     loginUser,
     logout,
     getUser,
     loginStatus,
-    updateUser
+    updateUser,
+    changePasswoard,
 };

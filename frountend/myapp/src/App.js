@@ -7,6 +7,7 @@ import SignIn from './components/SignIn/SignIn';
 import { Header } from './components/NavHeader/Header';
 import Orders from './components/Orders/Orders';
 import Analytics from './components/Analytics/Analytics';
+import Suppliers from './components/Suppliers/Suppliers';
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
@@ -24,11 +25,7 @@ function App() {
       case 'analytics':
         return <Analytics/>;
       case 'suppliers':
-        return <div className="content-placeholder">
-                 <i className="fas fa-users"></i>
-                 <h2>Suppliers Section</h2>
-                 <p>This section is under development.</p>
-               </div>;
+        return <Suppliers/>;
       case 'settings':
         return <div className="content-placeholder">
                  <i className="fas fa-cog"></i>

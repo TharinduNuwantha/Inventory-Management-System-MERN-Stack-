@@ -139,3 +139,35 @@ body {
     padding: 15px;
   }
 }
+
+
+/* Content Placeholder */
+.content-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.content-placeholder i {
+  font-size: 64px;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.content-placeholder h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: var(--dark);
+}
+
+.content-placeholder p {
+  color: var(--gray);
+  max-width: 400px;
+}

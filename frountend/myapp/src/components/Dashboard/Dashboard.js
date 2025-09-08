@@ -1,23 +1,11 @@
 import React from 'react';
 import './Dashboard.css';
+import { Header } from '../NavHeader/Header';
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <div className="header">
-        <h1 className="page-title">Dashboard Overview</h1>
-        <div className="user-profile">
-          <div className="notification-bell">
-            <i className="fas fa-bell"></i>
-            <span className="notification-badge">3</span>
-          </div>
-          <div className="user-info">
-            <span className="user-name">John Smith</span>
-            <span className="user-role">Administrator</span>
-          </div>
-          <div className="user-avatar">JS</div>
-        </div>
-      </div>
+ 
 
       <div className="dashboard-cards">
         <div className="card">

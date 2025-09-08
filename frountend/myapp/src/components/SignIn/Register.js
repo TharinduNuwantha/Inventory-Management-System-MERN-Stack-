@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Auth.css';
 
-const Register = ({ switchToSignIn, onRegister }) => {
+const Register = ({ switchAuth, onRegister }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -227,7 +227,7 @@ const Register = ({ switchToSignIn, onRegister }) => {
         </form>
 
         <div className="auth-footer">
-          <p>Already have an account? <button onClick={switchToSignIn} className="auth-link">Sign in</button></p>
+          <p>Already have an account? <button onClick={switchAuth} className="auth-link">Sign in</button></p>
         </div>
 
         <div className="auth-divider">

@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import Dashboard from './components/Dashboard/Dashboard';
 import Inventory from './components/Inventory/Inventory';
 import './App.css';
+import Register from './components/SignIn/Register';
+import SignIn from './components/SignIn/SignIn';
+import { Header } from './components/NavHeader/Header';
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
+  const [activeAuth, setActiveAuth] = useState('signin'); // 'signin' or 'register'
 
   const renderContent = () => {
+    
     switch(activePage) {
       case 'dashboard':
         return <Dashboard />;
@@ -37,11 +42,7 @@ function App() {
                  <p>This section is under development.</p>
                </div>;
       case 'profile':
-        return <div className="content-placeholder">
-                 <i className="fas fa-user-circle"></i>
-                 <h2>Profile Section</h2>
-                 <p>This section is under development.</p>
-               </div>;
+        return (activeAuth === 'signin' ? <SignIn switchAuth={()=>setActiveAuth('register')} /> : <Register switchAuth={()=>setActiveAuth('signin')} />);
       default:
         return <Dashboard />;
     }
@@ -53,6 +54,7 @@ function App() {
 
   return (
     <div className="app-container">
+      
       {/* Sidebar Navigation */}
       <aside className="sidebar">
         <div className="logo-container">
@@ -159,6 +161,7 @@ function App() {
 
       {/* Main Content */}
       <main className="main-content">
+        <Header />
         {renderContent()}
       </main>
     </div>

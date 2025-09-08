@@ -5,6 +5,7 @@ import './App.css';
 import Register from './components/SignIn/Register';
 import SignIn from './components/SignIn/SignIn';
 import { Header } from './components/NavHeader/Header';
+import Orders from './components/Orders/Orders';
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
@@ -18,11 +19,7 @@ function App() {
       case 'inventory':
         return <Inventory />;
       case 'orders':
-        return <div className="content-placeholder">
-                 <i className="fas fa-shopping-cart"></i>
-                 <h2>Orders Section</h2>
-                 <p>This section is under development.</p>
-               </div>;
+        return <Orders/>;
       case 'analytics':
         return <div className="content-placeholder">
                  <i className="fas fa-chart-bar"></i>

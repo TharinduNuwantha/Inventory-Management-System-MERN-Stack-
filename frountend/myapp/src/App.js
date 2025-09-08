@@ -6,6 +6,7 @@ import Register from './components/SignIn/Register';
 import SignIn from './components/SignIn/SignIn';
 import { Header } from './components/NavHeader/Header';
 import Orders from './components/Orders/Orders';
+import Analytics from './components/Analytics/Analytics';
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
@@ -21,11 +22,7 @@ function App() {
       case 'orders':
         return <Orders/>;
       case 'analytics':
-        return <div className="content-placeholder">
-                 <i className="fas fa-chart-bar"></i>
-                 <h2>Analytics Section</h2>
-                 <p>This section is under development.</p>
-               </div>;
+        return <Analytics/>;
       case 'suppliers':
         return <div className="content-placeholder">
                  <i className="fas fa-users"></i>

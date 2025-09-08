@@ -6,6 +6,7 @@ const { now } = require("mongoose");
 
 
 
+
 const generateToken = (id) =>{
     return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:"1d"})
 }
@@ -178,7 +179,28 @@ const updateUser = asyncHandler(async (req,res)=> {
 // change passwoard
 
 const changePasswoard = asyncHandler(async (req,res)=>{
-    res.send("change passwoard");
+    const user = await User.findById(req.user._id);
+    const{oldpasswoard,newpasswoard} = req.body;
+
+    //validate
+    if(!user){
+        return res.status(400).json({ message: "User not found,please signup  :(" });
+    }
+    if(!oldpasswoard || !newpasswoard){
+        return res.status(400).json({ message: "Please add old and new passwoard :(" });
+    }
+
+    //cheack if old passwoard match passwoard in db
+    const passwoardIsCorrect = await bcrypt.compare(oldpasswoard,user.password);
+
+    //save new passwoard
+    if(user && passwoardIsCorrect){
+        user.password = newpasswoard
+        await user.save();
+        res.status(200).json({message:"Passwoard change successfuly :)"})
+    }else{
+        res.status(400)
+    }
 })
 
 module.exports = {
